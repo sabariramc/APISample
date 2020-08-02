@@ -33,9 +33,14 @@ class BillDetail(Resource):
         due_amount = user_data.get('due_amount')
         due_amount = due_amount if is_non_empty_value(due_amount) else 0
         due_amount = due_amount if due_amount > 0 else 0
-        return {
+        response_data = {
             "customerName": user_data.get('name'),
-            "dueAmount": str(due_amount),
-            "dueDate": user_data.get('due_date'),
-            "refID": user_data.get('reference_id')
         }
+        if due_amount > 0:
+            paid_amount = user_data.get('paid_amount')
+            due_amount = due_amount - paid_amount if is_non_empty_value(paid_amount) else due_amount
+            response_data['dueAmount'] = str(due_amount)
+            if due_amount > 0:
+                response_data['dueDate'] = user_data.get('due_date')
+                response_data['refID'] = user_data.get('reference_id')
+        return response_data

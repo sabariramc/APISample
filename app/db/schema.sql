@@ -13,6 +13,7 @@ CREATE TABLE customer_due(
     customer_id INTEGER NOT NULL,
     due_date TEXT NOT NULL,
     due_amount REAL NOT NULL,
+    paid_amount REAL,
     reference_id TEXT UNIQUE NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer (id)
 );

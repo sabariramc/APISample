@@ -47,6 +47,10 @@ class PaymentUpdate(Resource):
                 "insert into due_payment_info(due_id,amount_paid,paid_on_date,transaction_id,acknowledgement_id)VALUES(?,?,?,?,?)"
                 , (due_data.get('id'), transaction.get('amountPaid'), str(transaction.get('date')),
                    transaction.get('id'), acknowledgement_id))
+            execute_query(
+                "update customer_due set paid_amount = ? where id = ?",
+                (due_data.get('due_amount'), due_data.get('id'))
+            )
             db_conn.commit()
         else:
             transaction_data = transaction_data[0]
