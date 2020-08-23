@@ -17,7 +17,7 @@ class EventAPI(Api):
     def handle_error(self, e):
         if isinstance(e, HTTPException):
             return {"status": "ERROR",
-                    "errorCode": e.message}, e.code
+                    "errorCode": str(e)}, e.code
         else:
             return super().handle_error(e)
 

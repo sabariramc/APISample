@@ -10,10 +10,9 @@ from app.exception import AppException
 
 class HTTPException(AppException):
 
-    def __init__(self, http_error_code, message, *args, **kwargs):
-        super().__init__(self, *args, **kwargs)
+    def __init__(self, http_error_code, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.code = http_error_code
-        self.message = message
 
 
 class HTTPForbidden(HTTPException):
