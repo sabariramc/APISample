@@ -10,6 +10,7 @@ from flask_restful import Api
 from .exception.httpexception import HTTPException
 from .billdetail import BillDetail
 from .paymentupdate import PaymentUpdate
+from .requestparser import requires_api_key
 
 
 class EventAPI(Api):
@@ -22,7 +23,7 @@ class EventAPI(Api):
             return super().handle_error(e)
 
 
-api = EventAPI()
+api = EventAPI(decorators=[requires_api_key])
 api.add_resource(BillDetail, "/fetch-bill")
 api.add_resource(PaymentUpdate, "/payment-update")
 

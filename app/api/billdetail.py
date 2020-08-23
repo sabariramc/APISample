@@ -18,7 +18,6 @@ from ..utility import is_non_empty_value
 
 class BillDetail(Resource):
 
-    @requires_api_key
     @parse_request({
         "mobileNumber": {'data_type': str, 'required': True, 'regex': r'^[6-9]\d{9}$'}
     }

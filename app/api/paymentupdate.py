@@ -15,7 +15,6 @@ from .exception import HTTPInvalidReference, HTTPAmountMisMatch
 
 class PaymentUpdate(Resource):
 
-    @requires_api_key
     @parse_request(
         {
             'refID': {'data_type': str, 'required': True, }
